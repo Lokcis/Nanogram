@@ -21,7 +21,8 @@ public class InterfazApp extends JFrame {
 
     // Relaciones
     private PanelGrilla pnlMundo;
-    private PanelPistas pnlPistas;
+    private PanelPistasHorizontal pnlPistasHorizontal;
+    private PanelPistasVertical pnlPistasVertical;
     private Controlador ctrl;
 
     // Atributos   
@@ -39,7 +40,7 @@ public class InterfazApp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Cerrar programa cuando se le da a la X
 
         //Imagen a la barra de tareas
-        ImageIcon icon = new ImageIcon(getClass().getResource("/resources/BTareas2.jpg"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/resources/image/BTareas2.jpg"));
         Image image = icon.getImage();
         setIconImage(image);
 
@@ -55,9 +56,15 @@ public class InterfazApp extends JFrame {
         pnlMundo.setBounds(145, 259, 430, 430);
         add(pnlMundo);
         
-        pnlPistas = new PanelPistas();
-        pnlPistas.setBounds(145, 180, 430, 75);
-        add(pnlPistas);
+        pnlPistasHorizontal = new PanelPistasHorizontal();
+        pnlPistasHorizontal.setBounds(145, 180, 430, 75);
+        add(pnlPistasHorizontal);
+        
+        pnlPistasVertical = new PanelPistasVertical();
+        pnlPistasVertical.setBounds(65, 259, 75, 430);
+        add(pnlPistasVertical);
+        
+        
 
         // Conecta controlador a los paneles   
         ctrl.conectar(pnlMundo);

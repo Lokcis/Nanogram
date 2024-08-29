@@ -69,8 +69,8 @@ class LabelClicMouse extends MouseAdapter {
         this.ctrl = ctrl;
         this.x = x;
         this.y = y;
-        this.imgBlock = new ImageIcon(getClass().getResource("/resources/BTareas1.jpg"));
-        this.imgXN = new ImageIcon(getClass().getResource("/resources/xn.jpg"));
+        this.imgBlock = new ImageIcon(getClass().getResource("/resources/image/BTareas1.jpg"));
+        this.imgXN = new ImageIcon(getClass().getResource("/resources/image/xn.jpg"));
         this.pnlMundo = pnlMundo;
     }
 
