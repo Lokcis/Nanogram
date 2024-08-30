@@ -41,13 +41,23 @@ public class LoadNono {
             e.printStackTrace();
         }
         try {
-            for (int i = 0; i < 5; i++) { // Lee pistas de las filas
+            for (int i = 0; i < 5; i++) { // Lee pistas de las filas                
                 line = buffer.readLine();
                 rows[i] = line.split(" ");
+                for (int j = 0; j < rows[i].length; j++) { // Recorre cada elemento de la fila
+                    if (rows[i][j].equals("0")) { // Verifica si el valor es "0"
+                        rows[i][j] = " "; // Reemplaza "0" por un espacio
+                    }
+                }
             }
             for (int i = 0; i < 10; i++) { // Lee pistas de las columnas
                 line = buffer.readLine();
-                cols[i] = line.split(" ");
+                cols[i] = line.split(" "); // Inicializa cols[i] antes del bucle
+                for (int j = 0; j < cols[i].length; j++) { // Recorre cada elemento de la columna
+                    if (cols[i][j].equals("0")) { // Verifica si el valor es "0"
+                        cols[i][j] = " "; // Reemplaza "0" por un espacio
+                    }
+                }
             }
             for (int i = 0; i < 10; i++) { // Lee el nonograma
                 line = buffer.readLine();
@@ -58,7 +68,8 @@ public class LoadNono {
             e.printStackTrace();
         }
     }
-/*
+
+    /*
     public boolean verificarSolucion(JLabel[][] tablero) {
         for (int i = 0; i < nono.length; i++) {
             for (int j = 0; j < nono[i].length; j++) {
@@ -76,7 +87,7 @@ public class LoadNono {
         }
         return true;
     }
-*/
+     */
     private boolean esImagenCorrecta(JLabel label, String rutaImagenEsperada) {
         Icon icon = label.getIcon();
         if (icon instanceof ImageIcon) {
@@ -86,4 +97,3 @@ public class LoadNono {
         return false;
     }
 }
-
