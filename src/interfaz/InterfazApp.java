@@ -24,7 +24,10 @@ public class InterfazApp extends JFrame {
     private PanelGrilla pnlMundo;
     private PanelPistasHorizontal pnlPistasHorizontal;
     private PanelPistasVertical pnlPistasVertical;
+    private PanelVidas pnlVidas;
     private Controlador ctrl;
+    private ImageIcon icon;
+    private Image image;
 
     // Atributos   
     private JMenuBar mbrOpciones; // crear JMenuItem para las opciones
@@ -35,15 +38,15 @@ public class InterfazApp extends JFrame {
         //Propiedades de la interfaz o frame
         setTitle("Nonograma");
         getContentPane().setLayout(null);  //Tipo de layout, en este caso null
-        setSize(620, 760);  //Tamaño del Frame
+        setSize(575, 760);  //Tamaño del Frame
         setLocationRelativeTo(null);  //Centra el Frame
         setResizable(false);  //No permite cambiar el tamaño del frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Cerrar programa cuando se le da a la X
         getContentPane().setBackground(Color.WHITE);
         
         //Imagen a la barra de tareas
-        ImageIcon icon = new ImageIcon(getClass().getResource("/resources/image/BTareas2.jpg"));
-        Image image = icon.getImage();
+        icon = new ImageIcon(getClass().getResource("/resources/image/BTareas2.jpg"));
+        image = icon.getImage();
         setIconImage(image);
 
         //Enlaza el controlador
@@ -55,21 +58,23 @@ public class InterfazApp extends JFrame {
 
         // Instancia los paneles    
         pnlMundo = new PanelGrilla(ctrl);
-        pnlMundo.setBounds(145, 258, 440, 440);
+        pnlMundo.setBounds(100, 258, 440, 440);
         add(pnlMundo);
         
         loadNono = new LoadNono(); //Instancia de LoadNono
         loadNono.readNono("data/nonos/nono0.in");
         
         pnlPistasHorizontal = new PanelPistasHorizontal(loadNono);
-        pnlPistasHorizontal.setBounds(145, 180, 439, 75);
+        pnlPistasHorizontal.setBounds(101, 176, 439, 80);
         add(pnlPistasHorizontal);
    
         pnlPistasVertical = new PanelPistasVertical(loadNono);
-        pnlPistasVertical.setBounds(67, 259, 75, 439);
+        pnlPistasVertical.setBounds(15, 259, 83, 439);
         add(pnlPistasVertical);
         
-        
+        pnlVidas = new PanelVidas();
+        pnlVidas.setBounds(171, 79, 224, 64);
+        add(pnlVidas);
 
         // Conecta controlador a los paneles   
         ctrl.conectar(pnlMundo);
