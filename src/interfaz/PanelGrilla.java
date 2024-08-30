@@ -13,15 +13,17 @@ public class PanelGrilla extends JPanel {
 
     // Relaciones   
     private Controlador controlador;
+    private PanelTimer pnlTimer;
 
     //Constructor
-    public PanelGrilla(Controlador controlador) {
+    public PanelGrilla(Controlador controlador, PanelTimer pnlTimer) {
 
         setLayout(new GridLayout(10, 10));
         setBackground(Color.WHITE);
 
-        // Enlaza el Controlador y el Panle de Simulación
+        // Enlaza el Controlador, el Panel de Simulación y el timer
         this.controlador = controlador;
+        this.pnlTimer = pnlTimer;
 
         // Instancia atributos de la clase   
         lblMundo = new JLabel();
@@ -34,7 +36,7 @@ public class PanelGrilla extends JPanel {
                 lblMundo.setHorizontalAlignment(JLabel.CENTER);
                 lblMundo.setVerticalAlignment(JLabel.CENTER);
                 lblMundo.setEnabled(true);
-                lblMundo.addMouseListener(new LabelClicMouse(i, j, lblMundo, controlador, this));
+                lblMundo.addMouseListener(new LabelClicMouse(i, j, lblMundo, controlador, this, pnlTimer));
                 add(lblMundo);
             }
         }
@@ -50,11 +52,6 @@ public class PanelGrilla extends JPanel {
 
 }
 
-/**
- * Controlador de eventos del Mouse
- *
- * @author Giovanni Fajardo Utria
- */
 class LabelClicMouse extends MouseAdapter {
 
     private JLabel label;
@@ -62,8 +59,10 @@ class LabelClicMouse extends MouseAdapter {
     private int x, y;
     private ImageIcon imgBlock, imgXN;
     private PanelGrilla pnlMundo;
+    private PanelTimer pnlTimer;
+    private boolean timerStarted = false;  // Para evitar que se inicie el temporizador más de una vez
 
-    public LabelClicMouse(int x, int y, JLabel label, Controlador ctrl, PanelGrilla pnlMundo) {
+    public LabelClicMouse(int x, int y, JLabel label, Controlador ctrl, PanelGrilla pnlMundo, PanelTimer pnlTimer) {
         this.label = label;
         this.ctrl = ctrl;
         this.x = x;
@@ -71,9 +70,16 @@ class LabelClicMouse extends MouseAdapter {
         this.imgBlock = new ImageIcon(getClass().getResource("/resources/image/BTareas1.jpg"));
         this.imgXN = new ImageIcon(getClass().getResource("/resources/image/xn.jpg"));
         this.pnlMundo = pnlMundo;
+        this.pnlTimer = pnlTimer;
     }
 
+    @Override
     public void mouseClicked(MouseEvent evento) {
+        if (!timerStarted) {  // Verifica si el temporizador ya ha sido iniciado
+            pnlTimer.startTimer();  // Inicia el temporizador
+            timerStarted = true;  // Marca que el temporizador ha sido iniciado
+        }
+
         if (evento.isShiftDown()) {
             if (evento.isMetaDown()) { // Shif+Boton derecho    	                
 
@@ -85,6 +91,7 @@ class LabelClicMouse extends MouseAdapter {
             {
                 if ((label.getText()).equals("") && label.getIcon() == null) {
                     label.setIcon(imgBlock);
+                    System.out.println("Click derecho");
                     System.out.println("LabelClicMouse(" + x + "," + y + ")");
                     ctrl.putCell(x, y, "C");
 
@@ -98,7 +105,7 @@ class LabelClicMouse extends MouseAdapter {
             } else {
                 if (evento.isAltDown()) { // boton medio del raton
 
-                } else { // boton izquierdo 
+                } else { // boton izquierdo
                     System.out.println("Presiono el boton Izquierdo");
                     label.setIcon(imgXN);
                 }

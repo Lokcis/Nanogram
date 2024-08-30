@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package interfaz;
 
 import controlador.Controlador;
@@ -21,10 +17,11 @@ import mundo.LoadNono;
 public class InterfazApp extends JFrame {
 
     // Relaciones
-    private PanelGrilla pnlMundo;
+    private PanelGrilla pnlGrilla;
     private PanelPistasHorizontal pnlPistasHorizontal;
     private PanelPistasVertical pnlPistasVertical;
     private PanelVidas pnlVidas;
+    private PanelTimer pnlTimer;
     private Controlador ctrl;
     private ImageIcon icon;
     private Image image;
@@ -32,6 +29,7 @@ public class InterfazApp extends JFrame {
     // Atributos   
     private JMenuBar mbrOpciones; // crear JMenuItem para las opciones
     private LoadNono loadNono;
+
     //constructor
     public InterfazApp(Controlador ctrl) {
 
@@ -43,7 +41,7 @@ public class InterfazApp extends JFrame {
         setResizable(false);  //No permite cambiar el tamaño del frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Cerrar programa cuando se le da a la X
         getContentPane().setBackground(Color.WHITE);
-        
+
         //Imagen a la barra de tareas
         icon = new ImageIcon(getClass().getResource("/resources/image/BTareas2.jpg"));
         image = icon.getImage();
@@ -56,28 +54,32 @@ public class InterfazApp extends JFrame {
         mbrOpciones = new JMenuBar();
         //Poner los JMenuItem
 
-        // Instancia los paneles    
-        pnlMundo = new PanelGrilla(ctrl);
-        pnlMundo.setBounds(100, 258, 440, 440);
-        add(pnlMundo);
-        
+        // Instancia los paneles   
+        pnlTimer = new PanelTimer();
+        pnlTimer.setBounds(410, 30, 126, 30);
+        add(pnlTimer);
+
+        pnlGrilla = new PanelGrilla(ctrl, pnlTimer);
+        pnlGrilla.setBounds(100, 258, 440, 440);
+        add(pnlGrilla);
+
         loadNono = new LoadNono(); //Instancia de LoadNono
         loadNono.readNono("data/nonos/nono0.in");
-        
+
         pnlPistasHorizontal = new PanelPistasHorizontal(loadNono);
         pnlPistasHorizontal.setBounds(101, 176, 439, 80);
         add(pnlPistasHorizontal);
-   
+
         pnlPistasVertical = new PanelPistasVertical(loadNono);
         pnlPistasVertical.setBounds(15, 259, 83, 439);
         add(pnlPistasVertical);
-        
+
         pnlVidas = new PanelVidas();
         pnlVidas.setBounds(171, 79, 224, 64);
         add(pnlVidas);
 
         // Conecta controlador a los paneles   
-        ctrl.conectar(pnlMundo);
+        ctrl.conectar(pnlGrilla);
 
     }
 
