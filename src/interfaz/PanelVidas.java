@@ -15,6 +15,6 @@ public class PanelVidas {
     
     //Constructor
     public PanelVidas(){
-     //   setLayout(new GridLayout(10));
+     
     }
 }

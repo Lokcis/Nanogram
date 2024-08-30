@@ -1,17 +1,15 @@
 package interfaz;
 
-import java.awt.Color;
 import java.awt.event.*;
 import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.*;
-import javax.swing.border.*;
 import controlador.Controlador;
 
 public class PanelGrilla extends JPanel {
 
     // Atributos de la clase 		
-    private JLabel lblMundo[][];
+    private JLabel lblMundo;
 
     // Relaciones   
     private Controlador controlador;
@@ -20,23 +18,24 @@ public class PanelGrilla extends JPanel {
     public PanelGrilla(Controlador controlador) {
 
         setLayout(new GridLayout(10, 10));
+        setBackground(Color.WHITE);
 
         // Enlaza el Controlador y el Panle de Simulación
         this.controlador = controlador;
 
         // Instancia atributos de la clase   
-        lblMundo = new JLabel[10][10];
+        lblMundo = new JLabel();
 
         // Agrega los atributos al panel   
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                lblMundo[i][j] = new JLabel();
-                lblMundo[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                lblMundo[i][j].setHorizontalAlignment(JLabel.CENTER);
-                lblMundo[i][j].setVerticalAlignment(JLabel.CENTER);
-                lblMundo[i][j].setEnabled(true);
-                lblMundo[i][j].addMouseListener(new LabelClicMouse(i, j, lblMundo[i][j], controlador, this));
-                add(lblMundo[i][j]);
+                lblMundo = new JLabel();
+                lblMundo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                lblMundo.setHorizontalAlignment(JLabel.CENTER);
+                lblMundo.setVerticalAlignment(JLabel.CENTER);
+                lblMundo.setEnabled(true);
+                lblMundo.addMouseListener(new LabelClicMouse(i, j, lblMundo, controlador, this));
+                add(lblMundo);
             }
         }
     }
@@ -44,7 +43,7 @@ public class PanelGrilla extends JPanel {
     public void removeLabelClicMouse() {
         for (int i = 0; i < 35; i++) {
             for (int j = 0; j < 35; j++) {
-                lblMundo[i][j].removeMouseListener(lblMundo[i][j].getMouseListeners()[0]);
+                lblMundo.removeMouseListener(lblMundo.getMouseListeners()[0]);
             }
         }
     }

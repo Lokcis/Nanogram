@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import mundo.LoadNono;
 
 /**
  *
@@ -27,7 +28,7 @@ public class InterfazApp extends JFrame {
 
     // Atributos   
     private JMenuBar mbrOpciones; // crear JMenuItem para las opciones
-
+    private LoadNono loadNono;
     //constructor
     public InterfazApp(Controlador ctrl) {
 
@@ -38,7 +39,8 @@ public class InterfazApp extends JFrame {
         setLocationRelativeTo(null);  //Centra el Frame
         setResizable(false);  //No permite cambiar el tamaño del frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Cerrar programa cuando se le da a la X
-
+        getContentPane().setBackground(Color.WHITE);
+        
         //Imagen a la barra de tareas
         ImageIcon icon = new ImageIcon(getClass().getResource("/resources/image/BTareas2.jpg"));
         Image image = icon.getImage();
@@ -53,15 +55,18 @@ public class InterfazApp extends JFrame {
 
         // Instancia los paneles    
         pnlMundo = new PanelGrilla(ctrl);
-        pnlMundo.setBounds(145, 259, 430, 430);
+        pnlMundo.setBounds(145, 258, 440, 440);
         add(pnlMundo);
         
-        pnlPistasHorizontal = new PanelPistasHorizontal();
-        pnlPistasHorizontal.setBounds(145, 180, 430, 75);
-        add(pnlPistasHorizontal);
+        loadNono = new LoadNono(); //Instancia de LoadNono
+        loadNono.readNono("data/nonos/nono0.in");
         
-        pnlPistasVertical = new PanelPistasVertical();
-        pnlPistasVertical.setBounds(65, 259, 75, 430);
+        pnlPistasHorizontal = new PanelPistasHorizontal(loadNono);
+        pnlPistasHorizontal.setBounds(145, 180, 439, 75);
+        add(pnlPistasHorizontal);
+   
+        pnlPistasVertical = new PanelPistasVertical(loadNono);
+        pnlPistasVertical.setBounds(67, 259, 75, 439);
         add(pnlPistasVertical);
         
         

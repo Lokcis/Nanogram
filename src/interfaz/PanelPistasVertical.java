@@ -9,34 +9,41 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import mundo.LoadNono;
 
-public class PanelPistasVertical extends JPanel{
+public class PanelPistasVertical extends JPanel {
 
     //Atributos
-    private JPanel pnlPistasVertical[];
+    private JPanel pnlPistasVertical;
     private JLabel lblPistasVertical;
-    
-    public PanelPistasVertical(){
-        setLayout(new GridLayout(10, 1));
+    private String pistasVerticales[][];
+
+    public PanelPistasVertical(LoadNono loadNono) {
+        setLayout(new GridLayout(10, 1, 2, 2));
         
-        //Instancia de antributos
-        pnlPistasVertical = new JPanel[10];
-        
+        //Instancia de atributos
+        pistasVerticales = loadNono.getCols();
+
         for (int i = 0; i < 10; i++) {
-            pnlPistasVertical[i] = new JPanel();
-            pnlPistasVertical[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            pnlPistasVertical[i].setLayout(new GridLayout(1, 5));
-            
+            pnlPistasVertical = new JPanel();
+            pnlPistasVertical.setLayout(new GridLayout(1, 5));
+            pnlPistasVertical.setBackground(new Color(234, 238, 249));
+
+            // Aplicar el borde redondeado con un radio de 8 píxeles y color negro
+            pnlPistasVertical.setBorder(new RoundedBorder(8, Color.BLACK));
+
             // Crear y agregar 5 JLabel a cada panel interno
             for (int j = 0; j < 5; j++) {
-                lblPistasVertical = new JLabel("1");
+                lblPistasVertical = new JLabel(pistasVerticales[i][j]);
                 lblPistasVertical.setHorizontalAlignment(JLabel.CENTER);
                 lblPistasVertical.setVerticalAlignment(JLabel.CENTER);
-                pnlPistasVertical[i].add(lblPistasVertical);
+                pnlPistasVertical.add(lblPistasVertical);
             }
 
-            add(pnlPistasVertical[i]);
+            add(pnlPistasVertical);
         }
-        
+
     }
 }
