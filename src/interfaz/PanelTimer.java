@@ -36,10 +36,18 @@ public class PanelTimer extends JPanel {
         });
 
     }
-    
+
     public void startTimer() {
         if (!timer.isRunning()) {  // Inicia el temporizador si no está ya corriendo
             timer.start();
         }
+
     }
+
+    public void stopTimer() {
+        timer.stop();
+          counter = 0;
+    }
+
+  
 }

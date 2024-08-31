@@ -68,32 +68,4 @@ public class LoadNono {
             e.printStackTrace();
         }
     }
-
-    /*
-    public boolean verificarSolucion(JLabel[][] tablero) {
-        for (int i = 0; i < nono.length; i++) {
-            for (int j = 0; j < nono[i].length; j++) {
-                // Verificar la imagen según la matriz 'nono'
-                if (nono[i][j].equals("X")) {
-                    if (!esImagenCorrecta(tablero[i][j], "ruta/de/la/imagen/X.png")) {
-                        return false;
-                    }
-                } else if (nono[i][j].equals("0")) {
-                    if (!esImagenCorrecta(tablero[i][j], "ruta/de/la/imagen/cuadro_negro.png")) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
-     */
-    private boolean esImagenCorrecta(JLabel label, String rutaImagenEsperada) {
-        Icon icon = label.getIcon();
-        if (icon instanceof ImageIcon) {
-            ImageIcon imageIcon = (ImageIcon) icon;
-            return imageIcon.getDescription().equals(rutaImagenEsperada);
-        }
-        return false;
-    }
 }

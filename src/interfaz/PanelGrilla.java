@@ -5,53 +5,54 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.*;
 import controlador.Controlador;
-
 public class PanelGrilla extends JPanel {
 
-    // Atributos de la clase 		
-    private JLabel lblMundo;
-
-    // Relaciones   
     private Controlador controlador;
     private PanelTimer pnlTimer;
+    private JLabel lblMundo; // Matriz de JLabels para cada celda del tablero
+    private String[][] tableroUsuario; // Matriz que representa el estado del tablero del usuario
 
-    //Constructor
     public PanelGrilla(Controlador controlador, PanelTimer pnlTimer) {
-
         setLayout(new GridLayout(10, 10));
         setBackground(Color.WHITE);
 
-        // Enlaza el Controlador, el Panel de Simulación y el timer
+        lblMundo = new JLabel();
+        tableroUsuario = new String[10][10]; // Inicializamos la matriz de usuario
+
         this.controlador = controlador;
         this.pnlTimer = pnlTimer;
 
-        // Instancia atributos de la clase   
-        lblMundo = new JLabel();
-
-        // Agrega los atributos al panel   
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                lblMundo = new JLabel();
+                lblMundo= new JLabel();
                 lblMundo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 lblMundo.setHorizontalAlignment(JLabel.CENTER);
                 lblMundo.setVerticalAlignment(JLabel.CENTER);
                 lblMundo.setEnabled(true);
                 lblMundo.addMouseListener(new LabelClicMouse(i, j, lblMundo, controlador, this, pnlTimer));
+                tableroUsuario[i][j] = ""; 
                 add(lblMundo);
             }
         }
     }
 
-    public void removeLabelClicMouse() {
-        for (int i = 0; i < 35; i++) {
-            for (int j = 0; j < 35; j++) {
+  
+    public String[][] getTableroUsuario() {
+        return tableroUsuario;
+    }
+
+    public void actualizarTableroUsuario(int x, int y, String valor) {
+        tableroUsuario[x][y] = valor;
+    }
+
+   public void removeLabelClicMouse() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
                 lblMundo.removeMouseListener(lblMundo.getMouseListeners()[0]);
             }
         }
     }
-
 }
-
 class LabelClicMouse extends MouseAdapter {
 
     private JLabel label;
@@ -60,7 +61,7 @@ class LabelClicMouse extends MouseAdapter {
     private ImageIcon imgBlock, imgXN;
     private PanelGrilla pnlMundo;
     private PanelTimer pnlTimer;
-    private boolean timerStarted = false;  // Para evitar que se inicie el temporizador más de una vez
+    private boolean timerStarted = false;
 
     public LabelClicMouse(int x, int y, JLabel label, Controlador ctrl, PanelGrilla pnlMundo, PanelTimer pnlTimer) {
         this.label = label;
@@ -75,41 +76,22 @@ class LabelClicMouse extends MouseAdapter {
 
     @Override
     public void mouseClicked(MouseEvent evento) {
-        if (!timerStarted) {  // Verifica si el temporizador ya ha sido iniciado
-            pnlTimer.startTimer();  // Inicia el temporizador
-            timerStarted = true;  // Marca que el temporizador ha sido iniciado
+        if (!timerStarted) {
+            pnlTimer.startTimer();
+            
+            timerStarted = true;
         }
 
-        if (evento.isShiftDown()) {
-            if (evento.isMetaDown()) { // Shif+Boton derecho    	                
-
-            } else {// Shift+Boton Izquierdo
-
-            }
-        } else {
-            if (evento.isMetaDown()) // boton derecho del raton - Pone celulas o Quita celulas
-            {
-                if ((label.getText()).equals("") && label.getIcon() == null) {
-                    label.setIcon(imgBlock);
-                    System.out.println("Click derecho");
-                    System.out.println("LabelClicMouse(" + x + "," + y + ")");
-                    ctrl.putCell(x, y, "C");
-
-                } else if (label.getIcon() != null) {
-                    label.setIcon(null);
-                    System.out.println("Quitar celula: LabelClicMouse(" + x + "," + y + ")");
-                    ctrl.putCell(x, y, "-");
-
-                } else {
-                }
-            } else {
-                if (evento.isAltDown()) { // boton medio del raton
-
-                } else { // boton izquierdo
-                    System.out.println("Presiono el boton Izquierdo");
-                    label.setIcon(imgXN);
-                }
-            }
+        if (evento.isMetaDown()) { // botón derecho
+            pnlMundo.actualizarTableroUsuario(x, y, "0"); // Se asigna un '0'
+            label.setIcon(imgBlock);
+        } else { // botón izquierdo
+            pnlMundo.actualizarTableroUsuario(x, y, "X"); // Se asigna una 'X'
+            label.setIcon(imgXN);
         }
+
+        // verificamos la solución
+        ctrl.verificarSolucion(x, y);
     }
 }
+

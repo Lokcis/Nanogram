@@ -9,6 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import mundo.LoadNono;
+import mundo.Nonograma;
 
 /**
  *
@@ -20,8 +21,10 @@ public class InterfazApp extends JFrame {
     private PanelGrilla pnlGrilla;
     private PanelPistasHorizontal pnlPistasHorizontal;
     private PanelPistasVertical pnlPistasVertical;
+    private Nonograma juegoNonograma;
     private PanelVidas pnlVidas;
     private PanelTimer pnlTimer;
+    private Nonograma nono;
     private Controlador ctrl;
     private ImageIcon icon;
     private Image image;
@@ -77,9 +80,10 @@ public class InterfazApp extends JFrame {
         pnlVidas = new PanelVidas();
         pnlVidas.setBounds(171, 79, 224, 64);
         add(pnlVidas);
+        nono = new Nonograma(pnlGrilla,loadNono);
+        
 
-        // Conecta controlador a los paneles   
-        ctrl.conectar(pnlGrilla);
+        ctrl.conectar(pnlGrilla,pnlVidas,loadNono,pnlTimer,nono);
 
     }
 
