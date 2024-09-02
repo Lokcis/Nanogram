@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import mundo.LoadNono;
 
 /**
  *
@@ -13,12 +14,16 @@ import javax.swing.JPanel;
  */
 public class PanelBotones extends JPanel implements ActionListener {
 
+    //Se crean los atributos de los botones y del cargue del Nonograma
     private JButton btnNivel1, btnNivel2, btnReset;
+    private LoadNono loadNono;
 
+    //Constructor de el panel de los botones
     public PanelBotones() {
-        setLayout(new FlowLayout());
-        setBackground(Color.WHITE);
+        setLayout(new FlowLayout());//Distribución de los botones.
+        setBackground(Color.WHITE);//Color del fondo del panel.
 
+        //Botones con la forma de su borde y color.
         btnNivel1 = new JButton("Nivel 1");
         btnNivel1.setBorder(new RoundedBorder(8, Color.BLACK));
         btnNivel1.setBackground(new Color(234, 238, 249));

@@ -54,8 +54,7 @@ public class InterfazApp extends JFrame {
 
         // Instancia controles de menu
         mbrOpciones = new JMenuBar();
-        //Poner los JMenuItem
-
+        
         // Instancia los paneles   
         pnlTimer = new PanelTimer();
         pnlTimer.setBounds(410, 50, 126, 30);
