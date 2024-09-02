@@ -22,6 +22,7 @@ public class InterfazApp extends JFrame {
     private Nonograma juegoNonograma;
     private PanelVidas pnlVidas;
     private PanelTimer pnlTimer;
+    private PanelBotones pnlBotones;    
     private Nonograma nono;
     private Controlador ctrl;
     private ImageIcon icon;
@@ -37,7 +38,7 @@ public class InterfazApp extends JFrame {
         //Propiedades de la interfaz o frame
         setTitle("Nonograma");
         getContentPane().setLayout(null);  //Tipo de layout, en este caso null
-        setSize(575, 700);  //Tamaño del Frame
+        setSize(575, 750);  //Tamaño del Frame
         setLocationRelativeTo(null);  //Centra el Frame
         setResizable(false);  //No permite cambiar el tamaño del frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Cerrar programa cuando se le da a la X
@@ -80,6 +81,9 @@ public class InterfazApp extends JFrame {
         add(pnlVidas);
         nono = new Nonograma(pnlGrilla,loadNono);
         
+        pnlBotones = new PanelBotones();
+        pnlBotones.setBounds(20, 653, 500, 64);
+        add(pnlBotones);
 
         ctrl.conectar(pnlGrilla,pnlVidas,loadNono,pnlTimer,nono);
 
