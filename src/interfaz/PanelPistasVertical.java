@@ -6,11 +6,8 @@ package interfaz;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import mundo.LoadNono;
 
 public class PanelPistasVertical extends JPanel {

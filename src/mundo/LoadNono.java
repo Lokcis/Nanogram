@@ -1,8 +1,5 @@
 package mundo;
 
-import javax.swing.*;
-import java.awt.Color;
-import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileNotFoundException;

@@ -1,7 +1,6 @@
 package interfaz;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -36,8 +35,12 @@ public class PanelVidas extends JPanel {
 
     }
     public void actualizarVidas(int vidasRestantes) {
-        for (int i = 0; i < lblVida.length; i++) {
-            lblVida[i].setVisible(i < vidasRestantes);
+    for (int i = 0; i < lblVida.length; i++) {
+        if (i < vidasRestantes) {
+            lblVida[i].setVisible(true); // Show the life icon
+        } else {
+            lblVida[i].setIcon(new ImageIcon(getClass().getResource("/resources/image/sinvida64.png")));
         }
     }
+}
 }

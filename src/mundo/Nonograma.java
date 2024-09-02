@@ -1,9 +1,6 @@
 package mundo;
 
 import interfaz.PanelGrilla;
-import interfaz.PanelTimer;
-import interfaz.PanelVidas;
-import javax.swing.JOptionPane;
 
 /**
  *
