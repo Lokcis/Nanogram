@@ -58,7 +58,14 @@ public class PanelBotones extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         if (comando.equals("Jugar de Nuevo")) {
-            ctrl.reiniciarJuego();
+            int respuesta = JOptionPane.showConfirmDialog(this,
+                    "¿Estás seguro de que quieres reiniciar el nivel?",
+                    "Confirmar Reinicio",
+                    JOptionPane.YES_NO_OPTION
+            );
+            if (respuesta == JOptionPane.YES_OPTION) {
+                ctrl.reiniciarJuego();
+            }
         } else if (comando.equals("Nivel 1")) {
             ctrl.cargarNivel("nono0");
         } else if (comando.equals("Nivel 2")) {
