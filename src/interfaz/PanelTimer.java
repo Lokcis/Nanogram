@@ -46,7 +46,6 @@ public class PanelTimer extends JPanel {
 
     public void stopTimer() {
         timer.stop();
-        counter = 0;
     }
 
     public void reiniciarTimer() {
@@ -54,4 +53,12 @@ public class PanelTimer extends JPanel {
         lblTimer.setText("Tiempo: 00:00:00"); // Restablecemos la visualización
         startTimer();
     }
+
+    public String getTiempoTranscurrido() {
+        int hours = counter / 3600;
+        int minutes = (counter % 3600) / 60;
+        int seconds = counter % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+
 }

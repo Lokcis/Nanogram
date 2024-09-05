@@ -1,8 +1,6 @@
 package controlador;
 
-import interfaz.PanelGrilla;
-import interfaz.PanelTimer;
-import interfaz.PanelVidas;
+import interfaz.*;
 import javax.swing.JOptionPane;
 import mundo.LoadNono;
 import mundo.Nonograma;
@@ -43,30 +41,41 @@ public class Controlador {
 
         if (vidasRestantes <= 0) {
             pnlTimer.stopTimer();
-            JOptionPane.showMessageDialog(null, "¡Has perdido el juego!");
-            pnlTimer.stopTimer(); 
+            mostrarMensajePerdida();
             panelGrilla.setJuegoActivo(false);
         }
     }
 
     private void mostrarMensajeVictoria() {
         pnlTimer.stopTimer();
-        JOptionPane.showMessageDialog(null, "¡Felicidades! ¡Has ganado!");
-        pnlTimer.stopTimer(); 
+        String tiempo = pnlTimer.getTiempoTranscurrido();
+        JOptionPane.showMessageDialog(null, "¡Felicidades! ¡Has ganado en " + tiempo + "!");
         panelGrilla.setJuegoActivo(false);
     }
 
-    public void reiniciarJuego() {
-        panelGrilla = new PanelGrilla(this, pnlTimer); // Reiniciar la grilla
-        panelVidas = new PanelVidas(); // Reiniciar las vidas
-        pnlTimer.stopTimer(); // Detener el temporizador
-        pnlTimer.startTimer(); // Reiniciar el temporizador
-        vidasRestantes = 3; // Reiniciar las vidas
-
-        // Actualizar la UI con los nuevos paneles reiniciados
-        panelGrilla.revalidate();
-        panelGrilla.repaint();
-        panelVidas.revalidate();
-        panelVidas.repaint();
+    private void mostrarMensajePerdida() {
+        String tiempo = pnlTimer.getTiempoTranscurrido();
+        JOptionPane.showMessageDialog(null, "¡Has perdido el juego! Tiempo: " + tiempo);
     }
+
+    public void reiniciarJuego() {
+        panelGrilla.reiniciarGrilla(); // Reiniciar la grilla
+
+        panelVidas.reiniciarVidas(); // Reiniciar las vidas
+        pnlTimer.reiniciarTimer(); // Reiniciar el temporizado
+        vidasRestantes = 3; // Restablecer vidas restantes
+        panelGrilla.setJuegoActivo(true); // Asegúrate de habilitar el juego
+    }
+
+    public void cargarNivel(String nivel) {
+        LoadNono loadNono = new LoadNono();
+        loadNono.readNono("data/nonos/" + nivel + ".in");
+        juegoNonograma = new Nonograma(panelGrilla, loadNono);
+        conectar(panelGrilla, panelVidas, loadNono, pnlTimer, juegoNonograma);
+        reiniciarJuego();
+        
+        String mensaje = "Estás jugando el nivel " + (nivel.equals("nono0") ? "1" : "2");
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
+
 }

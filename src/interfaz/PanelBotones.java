@@ -13,7 +13,7 @@ import javax.swing.*;
  */
 public class PanelBotones extends JPanel implements ActionListener {
 
-    //Se crean los atributos de los botones y del cargue del Nonograma
+    // Atributos de los botones y del controlador
     private JButton btnNivel1, btnNivel2, btnReset;
     private Controlador ctrl;
 
@@ -21,27 +21,23 @@ public class PanelBotones extends JPanel implements ActionListener {
     private PanelVidas panelVidas;
     private PanelTimer panelTimer;
 
-    //Constructor de el panel de los botones
+    /**
+     * Constructor de la clase PanelBotones.
+     *
+     * @param ctrl El controlador del juego.
+     * @param panelGrilla El panel de la grilla.
+     * @param panelVidas El panel de las vidas.
+     * @param panelTimer El panel del temporizador.
+     */
     public PanelBotones(Controlador ctrl, PanelGrilla panelGrilla, PanelVidas panelVidas, PanelTimer panelTimer) {
         setLayout(new FlowLayout());//Distribución de los botones.
         setBackground(Color.WHITE);//Color del fondo del panel.
 
-        //Botones con la forma de su borde y color.
-        btnNivel1 = new JButton("Nivel 1");
-        btnNivel1.setBorder(new RoundedBorder(8, Color.BLACK));
-        btnNivel1.setBackground(new Color(234, 238, 249));
-        add(btnNivel1);
-
-        btnNivel2 = new JButton("Nivel 2");
-        btnNivel2.setBorder(new RoundedBorder(8, Color.BLACK));
-        btnNivel2.setBackground(new Color(234, 238, 249));
-        add(btnNivel2);
-
-        btnReset = new JButton("Jugar de Nuevo");
-        btnReset.setBorder(new RoundedBorder(8, Color.BLACK));
-        btnReset.setBackground(new Color(234, 238, 249));
+        // Inicializar y configurar los botones
+        btnNivel1 = crearBoton("Nivel 1");
+        btnNivel2 = crearBoton("Nivel 2");
+        btnReset = crearBoton("Jugar de Nuevo");
         btnReset.addActionListener(this);
-        add(btnReset);
 
         this.ctrl = ctrl;
         this.panelGrilla = panelGrilla;
@@ -49,12 +45,24 @@ public class PanelBotones extends JPanel implements ActionListener {
         this.panelTimer = panelTimer;
     }
 
+    private JButton crearBoton(String texto) {
+        JButton boton = new JButton(texto);
+        boton.setBorder(new RoundedBorder(8, Color.BLACK));
+        boton.setBackground(new Color(234, 238, 249));
+        boton.addActionListener(this);
+        add(boton);
+        return boton;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Jugar de Nuevo")) {
-            panelGrilla.reiniciarGrilla();
-            panelVidas.reiniciarVidas();
-            panelTimer.reiniciarTimer();
+        String comando = e.getActionCommand();
+        if (comando.equals("Jugar de Nuevo")) {
+            ctrl.reiniciarJuego();
+        } else if (comando.equals("Nivel 1")) {
+            ctrl.cargarNivel("nono0");
+        } else if (comando.equals("Nivel 2")) {
+            ctrl.cargarNivel("nono2");
         }
     }
 
