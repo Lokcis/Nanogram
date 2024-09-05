@@ -80,7 +80,7 @@ public class InterfazApp extends JFrame {
         add(pnlVidas);
         nono = new Nonograma(pnlGrilla,loadNono);
         
-        pnlBotones = new PanelBotones();
+        pnlBotones = new PanelBotones(ctrl, pnlGrilla, pnlVidas, pnlTimer);
         pnlBotones.setBounds(20, 653, 500, 64);
         add(pnlBotones);
 

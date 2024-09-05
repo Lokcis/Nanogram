@@ -46,8 +46,12 @@ public class PanelTimer extends JPanel {
 
     public void stopTimer() {
         timer.stop();
-          counter = 0;
+        counter = 0;
     }
 
-  
+    public void reiniciarTimer() {
+        stopTimer(); // Detenemos el temporizador
+        lblTimer.setText("Tiempo: 00:00:00"); // Restablecemos la visualización
+        startTimer();
+    }
 }

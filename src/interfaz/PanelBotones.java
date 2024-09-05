@@ -1,12 +1,11 @@
 package interfaz;
 
+import controlador.Controlador;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import mundo.LoadNono;
+import javax.swing.*;
 
 /**
  *
@@ -16,10 +15,14 @@ public class PanelBotones extends JPanel implements ActionListener {
 
     //Se crean los atributos de los botones y del cargue del Nonograma
     private JButton btnNivel1, btnNivel2, btnReset;
-    private LoadNono loadNono;
+    private Controlador ctrl;
+
+    private PanelGrilla panelGrilla;
+    private PanelVidas panelVidas;
+    private PanelTimer panelTimer;
 
     //Constructor de el panel de los botones
-    public PanelBotones() {
+    public PanelBotones(Controlador ctrl, PanelGrilla panelGrilla, PanelVidas panelVidas, PanelTimer panelTimer) {
         setLayout(new FlowLayout());//Distribución de los botones.
         setBackground(Color.WHITE);//Color del fondo del panel.
 
@@ -37,13 +40,21 @@ public class PanelBotones extends JPanel implements ActionListener {
         btnReset = new JButton("Jugar de Nuevo");
         btnReset.setBorder(new RoundedBorder(8, Color.BLACK));
         btnReset.setBackground(new Color(234, 238, 249));
+        btnReset.addActionListener(this);
         add(btnReset);
+
+        this.ctrl = ctrl;
+        this.panelGrilla = panelGrilla;
+        this.panelVidas = panelVidas;
+        this.panelTimer = panelTimer;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Nivel 1")) {
-            
+        if (e.getActionCommand().equals("Jugar de Nuevo")) {
+            panelGrilla.reiniciarGrilla();
+            panelVidas.reiniciarVidas();
+            panelTimer.reiniciarTimer();
         }
     }
 
