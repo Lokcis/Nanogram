@@ -12,6 +12,7 @@ public class Controlador {
     private PanelVidas panelVidas;
     private PanelTimer pnlTimer;
     private Nonograma juegoNonograma;
+    private LoadNono loadNono;
     private int vidasRestantes;
 
     public Controlador() {
@@ -22,6 +23,7 @@ public class Controlador {
         this.panelGrilla = panelGrilla;
         this.panelVidas = panelVidas;
         this.pnlTimer = pnlTimer;
+        this.loadNono = loadNono;
         this.juegoNonograma = juegoNonograma;
         this.vidasRestantes = 3;
     }
@@ -51,7 +53,7 @@ public class Controlador {
         pnlTimer.stopTimer();
         String tiempo = pnlTimer.getTiempoTranscurrido();
         JOptionPane.showMessageDialog(null, "¡Felicidades! ¡Has ganado en " + tiempo + "!");
-
+        panelGrilla.setJuegoActivo(false);
     }
 
     private void mostrarMensajePerdida() {
@@ -69,19 +71,14 @@ public class Controlador {
         panelGrilla.setJuegoActivo(true); // Asegúrate de habilitar el juego
     }
 
-    public void cargarNivel(String nivel) {
-        LoadNono loadNono = new LoadNono();
-        loadNono.readNono("data/nonos/" + nivel + ".in");
-        juegoNonograma = new Nonograma(panelGrilla, loadNono);
-        conectar(panelGrilla, panelVidas, loadNono, pnlTimer, juegoNonograma);
+    public void nivel(String nivel) {
+        loadNono.cargarNivel(nivel);
         reiniciarJuego();
 
         // Actualizar las pistas
         InterfazApp app = (InterfazApp) SwingUtilities.getWindowAncestor(panelGrilla);
         app.actualizarPistas(loadNono);
 
-        String mensaje = "Estás jugando el nivel " + (nivel.equals("nono0") ? "1" : "2");
-        JOptionPane.showMessageDialog(null, mensaje);
     }
 
 }

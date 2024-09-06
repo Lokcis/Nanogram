@@ -66,9 +66,9 @@ public class PanelBotones extends JPanel implements ActionListener {
                 ctrl.reiniciarJuego();
             }
         } else if (comando.equals("Nivel 1")) {
-            ctrl.cargarNivel("nono0");
+            ctrl.nivel("nono0");
         } else if (comando.equals("Nivel 2")) {
-            ctrl.cargarNivel("nono2");
+            ctrl.nivel("nono2");
         }
     }
 

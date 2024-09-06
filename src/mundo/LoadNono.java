@@ -1,9 +1,12 @@
 package mundo;
 
+import interfaz.InterfazApp;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class LoadNono {
 
@@ -64,5 +67,11 @@ public class LoadNono {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void cargarNivel(String nivel) {
+        readNono("data/nonos/" + nivel + ".in");
+        String mensaje = "Estás jugando el nivel " + (nivel.equals("nono0") ? "1" : "2");
+        JOptionPane.showMessageDialog(null, mensaje);
     }
 }
