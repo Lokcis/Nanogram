@@ -50,17 +50,17 @@ public class Controlador {
         pnlTimer.stopTimer();
         String tiempo = pnlTimer.getTiempoTranscurrido();
         JOptionPane.showMessageDialog(null, "¡Felicidades! ¡Has ganado en " + tiempo + "!");
-        panelGrilla.setJuegoActivo(false);
     }
 
     private void mostrarMensajePerdida() {
+        pnlTimer.stopTimer();
         String tiempo = pnlTimer.getTiempoTranscurrido();
         JOptionPane.showMessageDialog(null, "¡Has perdido el juego! Tiempo: " + tiempo);
+        panelGrilla.setJuegoActivo(false);
     }
 
     public void reiniciarJuego() {
         panelGrilla.reiniciarGrilla(); // Reiniciar la grilla
-
         panelVidas.reiniciarVidas(); // Reiniciar las vidas
         pnlTimer.reiniciarTimer(); // Reiniciar el temporizado
         vidasRestantes = 3; // Restablecer vidas restantes

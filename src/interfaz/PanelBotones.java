@@ -37,7 +37,6 @@ public class PanelBotones extends JPanel implements ActionListener {
         btnNivel1 = crearBoton("Nivel 1");
         btnNivel2 = crearBoton("Nivel 2");
         btnReset = crearBoton("Jugar de Nuevo");
-        btnReset.addActionListener(this);
 
         this.ctrl = ctrl;
         this.panelGrilla = panelGrilla;
