@@ -1,4 +1,3 @@
-
 package interfaz;
 
 import java.awt.Color;
@@ -16,7 +15,7 @@ public class PanelPistasVertical extends JPanel {
 
     public PanelPistasVertical(LoadNono loadNono) {
         setLayout(new GridLayout(10, 1, 2, 2));
-        
+
         //Instancia de atributos
         pistasVerticales = loadNono.getCols();
 
@@ -40,4 +39,16 @@ public class PanelPistasVertical extends JPanel {
         }
 
     }
+
+    public void actualizarPistas(LoadNono loadNono) {
+        pistasVerticales = loadNono.getCols();
+        for (int i = 0; i < 10; i++) {
+            JPanel pnlPista = (JPanel) getComponent(i);
+            for (int j = 0; j < 5; j++) {
+                JLabel lblPista = (JLabel) pnlPista.getComponent(j);
+                lblPista.setText(pistasVerticales[i][j]);
+            }
+        }
+    }
+
 }

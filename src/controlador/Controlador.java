@@ -2,6 +2,7 @@ package controlador;
 
 import interfaz.*;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import mundo.LoadNono;
 import mundo.Nonograma;
 
@@ -50,6 +51,7 @@ public class Controlador {
         pnlTimer.stopTimer();
         String tiempo = pnlTimer.getTiempoTranscurrido();
         JOptionPane.showMessageDialog(null, "¡Felicidades! ¡Has ganado en " + tiempo + "!");
+
     }
 
     private void mostrarMensajePerdida() {
@@ -73,7 +75,11 @@ public class Controlador {
         juegoNonograma = new Nonograma(panelGrilla, loadNono);
         conectar(panelGrilla, panelVidas, loadNono, pnlTimer, juegoNonograma);
         reiniciarJuego();
-        
+
+        // Actualizar las pistas
+        InterfazApp app = (InterfazApp) SwingUtilities.getWindowAncestor(panelGrilla);
+        app.actualizarPistas(loadNono);
+
         String mensaje = "Estás jugando el nivel " + (nivel.equals("nono0") ? "1" : "2");
         JOptionPane.showMessageDialog(null, mensaje);
     }

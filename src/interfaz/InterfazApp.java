@@ -22,7 +22,7 @@ public class InterfazApp extends JFrame {
     private Nonograma juegoNonograma;
     private PanelVidas pnlVidas;
     private PanelTimer pnlTimer;
-    private PanelBotones pnlBotones;    
+    private PanelBotones pnlBotones;
     private Nonograma nono;
     private Controlador ctrl;
     private ImageIcon icon;
@@ -54,7 +54,7 @@ public class InterfazApp extends JFrame {
 
         // Instancia controles de menu
         mbrOpciones = new JMenuBar();
-        
+
         // Instancia los paneles   
         pnlTimer = new PanelTimer();
         pnlTimer.setBounds(410, 50, 126, 30);
@@ -78,20 +78,25 @@ public class InterfazApp extends JFrame {
         pnlVidas = new PanelVidas();
         pnlVidas.setBounds(40, 30, 224, 64);
         add(pnlVidas);
-        nono = new Nonograma(pnlGrilla,loadNono);
-        
+        nono = new Nonograma(pnlGrilla, loadNono);
+
         pnlBotones = new PanelBotones(ctrl, pnlGrilla, pnlVidas, pnlTimer);
         pnlBotones.setBounds(20, 653, 500, 64);
         add(pnlBotones);
 
-        ctrl.conectar(pnlGrilla,pnlVidas,loadNono,pnlTimer,nono);
+        ctrl.conectar(pnlGrilla, pnlVidas, loadNono, pnlTimer, nono);
 
+    }
+
+    public void actualizarPistas(LoadNono loadNono) {
+        pnlPistasHorizontal.actualizarPistas(loadNono);
+        pnlPistasVertical.actualizarPistas(loadNono);
     }
 
     public static void main(String args[]) {
         InterfazApp frmMain = new InterfazApp(new Controlador());
         frmMain.setVisible(true);
-       
+
     }
 
 }
